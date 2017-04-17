@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_list.view.*
  * @author Kevin Salazar
  * @link kevicsalazar.com
  */
-class ListAdapter() : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
+class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
     private val items = mutableListOf<Item>()
 
@@ -32,6 +32,13 @@ class ListAdapter() : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
     fun add(item: Item) {
         items.add(item)
         notifyItemInserted(items.size)
+    }
+
+    fun remove(position: Int): String {
+        val item = items[position]
+        items.remove(item)
+        notifyItemRemoved(position)
+        return item.id
     }
 
     fun clear() {

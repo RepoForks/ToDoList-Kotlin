@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">ToDoList-Kotlin</string>
+    <string name="app_name">ToDoList</string>
     <string name="add_task">Añadir una tarea</string>
 </resources>

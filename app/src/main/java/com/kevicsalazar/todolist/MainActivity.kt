@@ -4,31 +4,39 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v7.widget.LinearLayoutManager
+import com.kevicsalazar.appkit_alerts.ext.Alert
 import com.kevicsalazar.todolist.model.Item
+import com.kevicsalazar.todolist.utils.hideKeyboard
+import com.kevicsalazar.todolist.utils.inputMethodManager
+import com.kevicsalazar.todolist.utils.swipeToDismiss
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainPresenter.View {
 
     var presenter: MainPresenter? = null
     var adapter: ListAdapter? = null
-    var categories: List<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         presenter = MainPresenter(this, PreferenceManager.getDefaultSharedPreferences(this))
-
-        categories = resources.getStringArray(R.array.categories).toList()
-
         adapter = ListAdapter()
+
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
+        recyclerView.swipeToDismiss {
+            adapter?.remove(it)?.let {
+                presenter?.deleteTask(it)
+            }
+        }
 
         presenter?.loadDataSaved()
 
         btnSend.setOnClickListener {
-            presenter?.saveTask(etTask.text.toString(), categories?.get(0) ?: "")
+            presenter?.saveTask(etTask.text.toString(), spCategories.selectedItem as String)
+            etTask.hideKeyboard(inputMethodManager)
+            etTask.setText("")
         }
 
     }
@@ -41,4 +49,7 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
         adapter?.add(item)
     }
 
+    override fun showMessage(title: String, message: String) {
+        Alert(title, message) { confirmButton("OK") }.show()
+    }
 }

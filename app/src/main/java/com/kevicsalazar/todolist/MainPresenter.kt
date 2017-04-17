@@ -18,18 +18,25 @@ class MainPresenter(val view: View, val pref: SharedPreferences) {
     }
 
     fun saveTask(task: String, category: String) {
+
+        if (task.isBlank()) {
+            view.showMessage("Aviso", "Debe ingresar una tarea")
+            return
+        }
+
         val items = pref.any<MutableList<Item>>("items") ?: mutableListOf()
         val item = Item(UUID.randomUUID().toString(), task, category)
         items.add(item)
         pref.put("items", items)
         view.addTaskToAdapter(item)
+
     }
 
-    fun deleteTask(item: Item) {
+    fun deleteTask(itemId: String) {
         val items = pref.any<MutableList<Item>>("items")
         items?.let {
-            it.removeIf { it.id == item.id }
-            pref.put("items", it)
+            it.remove(it.find { it.id == itemId })
+            pref.put("items", items)
         }
     }
 
@@ -38,6 +45,8 @@ class MainPresenter(val view: View, val pref: SharedPreferences) {
         fun clearAdapter()
 
         fun addTaskToAdapter(item: Item)
+
+        fun showMessage(title: String, message: String)
 
     }
 
