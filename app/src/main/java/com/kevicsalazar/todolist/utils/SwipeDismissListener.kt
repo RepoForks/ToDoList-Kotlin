@@ -3,6 +3,9 @@ package com.kevicsalazar.todolist.utils
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 
+/**
+ * https://github.com/lightningkite/kotlin-anko
+ */
 
 open class SwipeDismissListener(
         val canDismiss: (Int) -> Boolean = { true },

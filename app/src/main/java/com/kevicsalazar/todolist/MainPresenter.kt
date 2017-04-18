@@ -30,6 +30,9 @@ class MainPresenter(val view: View, val pref: SharedPreferences) {
         pref.put("items", items)
         view.addTaskToAdapter(item)
 
+
+        items.filter { it.category == "Pendientes" }.take(3)
+
     }
 
     fun deleteTask(itemId: String) {

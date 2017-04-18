@@ -9,7 +9,7 @@ import java.lang.reflect.Type
 import java.lang.reflect.WildcardType
 
 /**
- * Created by Kevin.
+ * https://github.com/SalomonBrys/Kotson
  */
 
 // Gson

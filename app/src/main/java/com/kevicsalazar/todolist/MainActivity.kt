@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import com.kevicsalazar.appkit_alerts.ext.Alert
 import com.kevicsalazar.todolist.model.Item
 import com.kevicsalazar.todolist.utils.hideKeyboard
-import com.kevicsalazar.todolist.utils.inputMethodManager
 import com.kevicsalazar.todolist.utils.swipeToDismiss
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
 
         btnSend.setOnClickListener {
             presenter?.saveTask(etTask.text.toString(), spCategories.selectedItem as String)
-            etTask.hideKeyboard(inputMethodManager)
+            hideKeyboard(etTask)
             etTask.setText("")
         }
 
