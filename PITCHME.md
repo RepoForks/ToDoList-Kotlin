@@ -23,10 +23,10 @@
 ```
 List<Item> items = new ArrayList<>();
 items.add(new Item(id, task, category))
+//...
 ```
 
 ```
-List<Item> items = new ArrayList<>();
 List<Item> filteredItems = new ArrayList<>();
 for (Item item : items) {
     if (item.getCategory().equals("Pendientes")) {
@@ -47,6 +47,7 @@ for (Item item : items) {
 ```
 val items = mutableListOf()
 items.add(Item(id, task, category))
+//...
 ```
 
 ```
@@ -57,6 +58,7 @@ val filteredItems = items.filter { it.category == "Pendientes" }.take(3)
 items.forEach {  }
 items.forEachIndexed { index, item ->  }
 items.sortedBy {  }
+//...
 ```
 
 #HSLIDE
@@ -87,7 +89,7 @@ saveTask("Pasear a Boby")
 
 ```
 public void saveTask(String task, String category) {
-    ...
+    //...
 }
 public void saveTask(String task) {
     saveTask(task, "Pendientes")
@@ -105,7 +107,7 @@ saveTask("Pasear a Boby")
 
 ```
 fun saveTask(task: String, category: String = "Pendientes") {
-    ...
+    //...
 }
 ```
 
