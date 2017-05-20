@@ -1,4 +1,4 @@
-package com.kevicsalazar.todolist
+package com.kevicsalazar.todolist.presentation
 
 import android.content.SharedPreferences
 import com.kevicsalazar.todolist.model.Item

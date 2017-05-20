@@ -1,10 +1,11 @@
-package com.kevicsalazar.todolist
+package com.kevicsalazar.todolist.presentation
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.kevicsalazar.appkit_alerts.ext.Alert
+import com.kevicsalazar.todolist.R
 import com.kevicsalazar.todolist.model.Item
 import com.kevicsalazar.todolist.utils.hideKeyboard
 import com.kevicsalazar.todolist.utils.swipeToDismiss
@@ -51,4 +52,5 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
     override fun showMessage(title: String, message: String) {
         Alert(title, message) { confirmButton("OK") }.show()
     }
+
 }
