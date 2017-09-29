@@ -30,14 +30,14 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
             }
         }
 
-        presenter?.loadDataSaved()
-
         btnSend.setOnClickListener {
             presenter?.saveTask(etTask.text.toString(), spCategories.selectedItem as String)
             hideKeyboard(etTask)
             etTask.setText("")
         }
 
+        presenter?.loadDataSaved()
+        
     }
 
     override fun clearAdapter() {
