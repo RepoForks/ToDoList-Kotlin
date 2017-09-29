@@ -1,6 +1,7 @@
 package com.kevicsalazar.todolist.utils
 
 import android.content.Context
+import android.support.v7.app.AlertDialog
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 
@@ -12,4 +13,11 @@ val Context.inputMethodManager: InputMethodManager get() = getSystemService(Cont
 
 fun Context.hideKeyboard(view: View) {
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun Context.alert(title: String, message: String, init: (AlertDialog.Builder.() -> Unit)? = null) = AlertDialog.Builder(this).apply {
+    setTitle(title)
+    setMessage(message)
+    setPositiveButton("OK", { dialog, w -> dialog.dismiss() })
+    init?.let { init() }
 }

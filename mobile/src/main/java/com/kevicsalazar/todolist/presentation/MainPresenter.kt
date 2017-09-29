@@ -2,7 +2,6 @@ package com.kevicsalazar.todolist.presentation
 
 import android.content.SharedPreferences
 import com.kevicsalazar.todolist.model.Item
-import com.kevicsalazar.todolist.utils.any
 import com.kevicsalazar.todolist.utils.put
 import java.util.*
 
@@ -10,11 +9,12 @@ import java.util.*
  * @author Kevin Salazar
  * @link kevicsalazar.com
  */
-class MainPresenter(val view: View, val pref: SharedPreferences) {
+class MainPresenter(val view: View) {
+
+    val items = mutableListOf<Item>()
 
     fun loadDataSaved() {
-        val items = pref.any<List<Item>>("items")
-        items?.forEach { view.addTaskToAdapter(it) }
+        items.forEach { view.addTaskToAdapter(it) }
     }
 
     fun saveTask(task: String, category: String) {
@@ -24,20 +24,14 @@ class MainPresenter(val view: View, val pref: SharedPreferences) {
             return
         }
 
-        val items = pref.any<MutableList<Item>>("items") ?: mutableListOf()
         val item = Item(UUID.randomUUID().toString(), task, category)
         items.add(item)
-        pref.put("items", items)
         view.addTaskToAdapter(item)
 
     }
 
     fun deleteTask(itemId: String) {
-        val items = pref.any<MutableList<Item>>("items")
-        items?.let {
-            it.remove(it.find { it.id == itemId })
-            pref.put("items", items)
-        }
+        items.removeIf({ it.id == itemId })
     }
 
     interface View {
